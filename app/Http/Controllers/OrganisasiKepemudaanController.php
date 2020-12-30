@@ -13,6 +13,7 @@ use App\Fokus_Kerja_Organisasi;
 use App\Kegiatan_Organisasi;
 use Illuminate\Support\Facades\DB;
 use Session;
+use Auth;
 
 class OrganisasiKepemudaanController extends Controller
 {
@@ -261,7 +262,12 @@ class OrganisasiKepemudaanController extends Controller
                                 ->whereNotIn('id_kegiatan', $listKegiatan)
                                 ->delete();
           Session::flash('Success', 'Berhasil menyunting data organisasi kepemudaan');
-          return redirect()->route('organisasi_kepemudaan');
+          if(Auth::user()->status == 'organisasi_kepemudaan') {
+            return redirect()->route('organisasi_kepemudaan.show', Auth::user()->id_kelompok_potensi_pemuda);
+          } else {
+            return redirect()->route('organisasi_kepemudaan');
+          }
+          
     }
 
     /**

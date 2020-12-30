@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Organisasi_Kepemudaan;
 use App\Kecamatan;
 use App\Subkategori;
+use Auth;
 
 use Illuminate\Http\Request;
 
